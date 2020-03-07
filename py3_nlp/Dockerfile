@@ -32,6 +32,8 @@ COPY    averaged_perceptron_tagger    /root/nltk_data/taggers/averaged_perceptro
 #COPY	src	                          /app/src
 #COPY	model	                      /app/model
 #################
+# if you specific file, target folder formate is /app/
+# if you specific . , target folder format is /app
 COPY    requirements.txt              /app/
 
 WORKDIR	/app
