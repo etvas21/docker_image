@@ -9,4 +9,5 @@ RUN   apt-get update  \
 		  && apt-get install -y wget  \
       && apt-get install -y vim
 
-RUN   sed -i '$ a\set encoding=utf-8' /etc/vim/vimrc
+COPY  ko    /usr/ko
+#RUN   sed -i '$ a\set encoding=utf-8' /etc/vim/vimrc

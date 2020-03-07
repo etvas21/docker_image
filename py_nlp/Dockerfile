@@ -1,6 +1,8 @@
 ##############################################
 #	Dockerfile to create Python3.7 image
 #   docker build -t py3_nlp:3.7 .
+#   docker run -d -p 8888:8888 -v /Users/hrkim/database/docker_volume/app_nlp:/app py3_nlp:3.7
+#   localhost:8888
 #
 #	NLP environement
 #		gensim, nltk, konlpy
@@ -21,8 +23,17 @@ RUN		apt-get update  \
 # In order to enter Hangul
 RUN   sed -i '$ a\set encoding=utf-8' /etc/vim/vimrc
 
+
+# Copy data
+COPY    punkt                         /root/nltk_data/tokenizers/punkt
+COPY    averaged_perceptron_tagger    /root/nltk_data/taggers/averaged_perceptron_tagger
+COPY	data	                      /app/data
+COPY	src	                          /app/src
+COPY	model	                      /app/model
+COPY    requirements.txt              /app
+
 WORKDIR	/app
-COPY	.	/app
+
 
 ############################################################
 # To install Java
@@ -47,7 +58,7 @@ RUN export JAVA_HOME
 ############################################################
 #RUN apt-get(Advanced packaging Tool)
 RUN		pip3 install -r requirements.txt	\
-		&& pip3 install tensorflow==2.0.0a0	\
+		&& pip3 install tensorflow==2.0.0a0 \
         && pip3 install pandas_profiling    \
         && pip3 install scipy				\
 		&& pip3 install PyMySQL				\
@@ -56,12 +67,13 @@ RUN		pip3 install -r requirements.txt	\
 		&& pip3 install gensim				\
 		&& pip3 install nltk				\
 		&& pip3 install jpype1				\
-		&& pip3 install konlpy
+		&& pip3 install konlpy              \
+        && pip3 install --upgrade pip3
+
 
 #
 RUN		ln -s /usr/bin/python3 /usr/bin/python
 RUN		ln -s /usr/bin/pip3 /usr/bin/pip
-RUN		pip install --upgrade pip
 
 # required root password
 #RUN	jupyter notebook --generate-config --allow-root
@@ -77,17 +89,11 @@ EXPOSE	8888
 #CMD	["mkdir", "./data", "./src"]
 ENTRYPOINT	jupyter notebook --allow-root --ip=0.0.0.0 --port=8888 --no-browser
 
-#########################################################################
-# docker run
-#   docker-compose specifies volume location
-#########################################################################
-# docker run -d -p 8888:8888 -v /Users/hrkim/database/docker_volume/app_nlp:/app py3_nlp:3.7
-# localhost:8888
 
 #########################################################################
 # To do
 #########################################################################
-# Create sub-folders /app/data, /app/src
+# [done]Create sub-folders /app/data, /app/src
 # change login pasword
-# run as docker-compose:done
+# [done]run as docker-compose
 ### end of script ###
