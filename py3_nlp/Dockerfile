@@ -26,8 +26,8 @@ RUN   sed -i '$ a\set encoding=utf-8' /etc/vim/vimrc
 
 
 # Copy data
-COPY    punkt                         /root/nltk_data/tokenizers/punkt
-COPY    averaged_perceptron_tagger    /root/nltk_data/taggers/averaged_perceptron_tagger
+#COPY    punkt                         /root/nltk_data/tokenizers/punkt
+#COPY    averaged_perceptron_tagger    /root/nltk_data/taggers/averaged_perceptron_tagger
 #################
 #COPY	data	                      /app/data
 #COPY	src	                          /app/src
@@ -51,7 +51,7 @@ RUN 	add-apt-repository -y ppa:webupd8team/java \
     	&& apt-get install -y ant \
     	&& apt-get clean \
     	&& apt-get install ca-certificates-java \
-    	&& apt-get clean \
+    	#&& apt-get clean \
     	&& update-ca-certificates -f
 
 # Setup JAVA_HOME -- useful for docker commandline
@@ -78,6 +78,8 @@ RUN		pip3 install -r requirements.txt	\
 RUN		ln -s /usr/bin/python3 /usr/bin/python
 RUN		ln -s /usr/bin/pip3 /usr/bin/pip
 RUN     pip install --upgrade pip
+#   nlkt data
+RUN     python3 -m nltk.downloader -d /usr/share/nltk_data all
 
 # required root password
 #RUN	jupyter notebook --generate-config --allow-root
