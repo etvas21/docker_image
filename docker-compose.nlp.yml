@@ -1,0 +1,46 @@
+# Run: >docker-compose -f docker-compose.nlp.yml up -d
+# Volume mapping at windows 10 docker
+#   mysql_db 	==> D:\_database\docker_volume\volumes\docker_image_mysql_db
+#   lab_nlp 	==> D:\_database\docker_volume\volumes\docker_image_lab_nlp
+#
+
+version: '3.7'
+
+services:
+ es:
+   container_name: db_es
+   image: es:6.8.6
+   restart: always
+   volumes:
+     - db_es:/usr/share/elasticsearch/data
+   ports:
+     - 9200:9200
+     - 9300:9300
+ db:
+   container_name: db_mysql
+   image: mysql:8.0.19
+   restart: always
+   # InternalError: (1130, "Host '172.19.0.4' is not allowed to connect to this MySQL server")
+   #command: --default-authentication-plugin=mysql_native_password
+   volumes:
+      - db_mysql:/var/lib/mysql
+   environment:
+      - MYSQL_ROOT_PASSWORD=l@tus
+   command: mysqld
+   ports:
+      - 3306:3306
+ app:
+   container_name: app_py3_nlp
+   image: py3_nlp:3.7
+   volumes:
+      #- app_nlp:/app   # Apply to windows 10
+      - /Users/hrkim/database/docker_volume/app_nlp:/app
+   ports:
+      - 8888:8888
+   links:
+      - db
+      - es
+volumes:
+   #app_nlp:    # Apply to windows 10
+   db_mysql:
+   db_es:

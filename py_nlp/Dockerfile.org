@@ -1,0 +1,61 @@
+##############################################
+#	Dockerfile to create Python3.7 image 
+#	NLP environement
+#		gensim, nltk
+##############################################
+
+FROM  ubuntu:18.04
+MAINTAINER	HRKIM <etvas21@naver.com>
+
+#
+RUN	apt-get update  &&  \
+    apt-get upgrade && \
+    apt-get install -y build-essential vim python3.7 python3-pip && \
+    mkdir -p /app/data /app/src
+
+WORKDIR	/app
+COPY	.	/app
+
+
+#RUN apt-get(Advanced packaging Tool)
+RUN	pip3 install -r requirements.txt
+RUN	pip3 install tensorflow==2.0.0a0
+RUN	pip3 install scipy
+RUN	pip3 install PyMySQL
+RUN	pip3 install elasticsearch
+RUN	pip3 install gensim
+RUN	pip3 install nltk
+
+#
+RUN	ln -s /usr/bin/python3 /usr/bin/python
+RUN	ln -s /usr/bin/pip3 /usr/bin/pip
+RUN	pip install --upgrade pip
+
+# required root password
+#RUN	jupyter notebook --generate-config --allow-root
+RUN	jupyter notebook --generate-config --allow-root --NotebookApp.token=''
+RUN	echo "c.NotebookApp.password = u'sha1:6a3f528eec40:6e896b6e4828f525a6e20e5411cd1c8075d68619'" >> /root/.jupyter/jupyter_notebook_config.py
+
+EXPOSE	8888
+
+# There can only be one CMD instruction in a Dockerfile.
+# If you list more than one CMD then only the last CMD will take effect.
+# ref:https://docs.docker.com/engine/reference/builder/
+# Not work
+#CMD	["mkdir", "./data", "./src"]
+ENTRYPOINT	jupyter notebook --allow-root --ip=0.0.0.0 --port=8888 --no-browser
+
+#########################################################################
+# docker run
+#       docker-compose를 사용하면 volume을 물리적 위치가 아닌경우는 docker가 임의로 지정함.
+#########################################################################
+# docker run -d -p 8888:8888 -v lab_py_elk_mysql:/app py3_nlp:3.7
+# localhost:8888
+
+#########################################################################
+# To do
+#########################################################################
+# Create sub-folders /app/data, /app/src
+# change login pasword
+# run as docker-compose
+### end of script ###

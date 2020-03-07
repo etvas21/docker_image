@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+ db:
+   container_name: mysql
+   image: mysql:8.0.19.02
+   restart: always
+   #command: --default-authentication-plugin=mysql_native_password
+   volumes:
+      - mysql_db:/var/lib/mysql
+   environment:
+      - MYSQL_ROOT_PASSWORD=l@tus
+   command: mysqld
+   ports:
+      - 3306:3306
+ app:
+   container_name: py3
+   image: py3:3.6
+   volumes:
+      - lab_py_elk_mysql:/app
+   ports:
+      - 8888:8888
+   links:
+      - db
+volumes:
+   lab_py_elk_mysql:
+   mysql_db:

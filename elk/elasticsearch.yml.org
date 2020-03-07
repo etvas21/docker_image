@@ -1,0 +1,9 @@
+cluster.name: "docker-cluster"
+
+#transport.host: localhost
+transport.tcp.port: 9300
+http.port: 9200
+network.host: 0.0.0.0
+# Add below line because localhost:9200 cannot accees from host
+# ref  https://jusunglee.tistory.com/entry/Docker-Port-Forwarding
+network.bind_host: 0.0.0.0
