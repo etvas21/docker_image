@@ -51,7 +51,7 @@ RUN 	add-apt-repository -y ppa:webupd8team/java \
     	&& apt-get install -y ant \
     	&& apt-get clean \
     	&& apt-get install ca-certificates-java \
-    	#&& apt-get clean \
+    	&& apt-get clean \
     	&& update-ca-certificates -f
 
 # Setup JAVA_HOME -- useful for docker commandline
