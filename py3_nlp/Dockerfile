@@ -1,7 +1,11 @@
 ##############################################
 #	Dockerfile to create Python3.7 image
 #   docker build -t py3_nlp:3.7 .
+<<<<<<< HEAD
 #   docker run -d -p 8888:8888 -v /Users/hrkim/database/docker_volume/app_nlp:/app py3_nlp:3.7
+=======
+#   docker run -d -p 8888:8888 -v /Users/hrkim/database/docker_volume/app_lab_nlp:/app py3_nlp:3.7
+>>>>>>> a124902bde1d7d32e017c253f2f0d43800b69734
 #   docker run -d -p 8888:8888 -v d:\_database\docker_volume\app_lab_nlp:/app py3_nlp:3.7
 #   localhost:8888
 #
