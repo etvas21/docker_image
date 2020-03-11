@@ -15,6 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+#	Dockerfile to create mysql 8.0.19 image
+#   docker build -t mysql:8.0.19 .
+#   docker run --name mysql -v db_mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=l@tus -d -p 3306:3306 mysql:8.0.19
+
 FROM oraclelinux:7-slim
 
 ARG MYSQL_SERVER_PACKAGE=mysql-community-server-minimal-8.0.19
@@ -46,4 +51,3 @@ CMD ["mysqld"]
 
 ##################################
 ##################################
-# docker run --name mysql -v mysql_mysql_db:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=l@tus -d -p 3306:3306 mysql:8.0.19.02

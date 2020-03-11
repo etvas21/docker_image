@@ -14,11 +14,11 @@ MAINTAINER	HRKIM <etvas21@naver.com>
 
 #
 RUN		apt-get update  \
-    	&& apt-get upgrade \
+    	#&& apt-get upgrade \
       	&& apt-get install -y curl  \
 	  	&& apt-get install -y wget  \
-      	&& apt-get install -y vim  \
-      	&& apt-get install -y software-properties-common \
+      	&& apt-get install -y vim   \
+        && apt-get install -y software-properties-common \
     	&& apt-get install -y build-essential vim python3.7 python3-pip
 
 # In order to enter Hangul
@@ -51,7 +51,7 @@ RUN 	add-apt-repository -y ppa:webupd8team/java \
     	&& apt-get install -y ant \
     	&& apt-get clean \
     	&& apt-get install ca-certificates-java \
-    	&& apt-get clean \
+    	#&& apt-get clean \
     	&& update-ca-certificates -f
 
 # Setup JAVA_HOME -- useful for docker commandline

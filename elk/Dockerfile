@@ -1,3 +1,8 @@
+#	Dockerfile to create elasticsearch image
+#   docker build -t es:6.8.6 .
+#   docker run --name es -v db_es:/var/lib/mysql -d -p 9200:9200  es:6.8.6
+
+
 FROM  ubuntu:18.04
 LABEL maintainer="etvas21@naver.com"
 
