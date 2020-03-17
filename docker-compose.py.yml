@@ -1,0 +1,18 @@
+# Run: >docker-compose -f docker-compose.py.yml up -d
+# Volume mapping at windows 10 docker
+#   mysql_db 	==> D:\_database\docker_volume\volumes\docker_image_mysql_db
+#   lab_nlp 	==> D:\_database\docker_volume\volumes\docker_image_lab_nlp
+#
+
+version: '3.7'
+
+services:
+ app:
+   container_name: app_py3_nlp
+   image: py3_nlp:3.7
+   volumes:
+      - ${py3_nlp_vol}:/app   # Apply to windows 10
+      #- d:\_database\docker_volume\app_lab_nlp:/app   # Apply to windows 10
+      #- /Users/hrkim/database/docker_volume/app_nlp:/app
+   ports:
+      - 8888:8888
