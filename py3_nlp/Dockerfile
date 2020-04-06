@@ -74,7 +74,10 @@ RUN		pip3 install -r requirements.txt	\
 		&& pip3 install nltk				\
 		&& pip3 install jpype1				\
 		&& pip3 install konlpy              \
-        && pip3 install pyLDAvis            # To support LDA analysis with Graphic
+        && pip3 install pyLDAvis            \	# To support LDA analysis with Graphic
+        ###
+        && pip3 install glove_python		# To use GloVe
+        
 #
 RUN		ln -s /usr/bin/python3 /usr/bin/python
 RUN		ln -s /usr/bin/pip3 /usr/bin/pip
