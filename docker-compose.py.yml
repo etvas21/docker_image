@@ -9,15 +9,17 @@ version: '3.7'
 services:
  app:
    container_name: app_py3_nlp
-   image: py3_nlp:3.7.3
+   image: py3_nlp:3.7.4
    volumes:
       - ${VOL_LAB_NLP}:/app   # Apply to windows 10
       #- d:\_database\docker_volume\app_lab_nlp:/app   # Apply to windows 10
       #- /Users/hrkim/database/docker_volume/app_lab_nlp:/app
    ports:
       - 8888:8888
+# 3.7.4
+### install fbprophet
 # 3.7.3
 # font , Thema install , configuration
 # 3.7.2
-# 
+#
 # 3.7.1: Base Image
